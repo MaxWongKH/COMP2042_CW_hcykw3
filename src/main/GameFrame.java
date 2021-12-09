@@ -15,14 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package src.test;
+package main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.awt.event.WindowListener;
 
 
 public class GameFrame extends JFrame implements WindowFocusListener {
@@ -43,7 +41,8 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
         gameBoard = new GameBoard(this);
 
-        homeMenu = new HomeMenu(this,new Dimension(450,300));
+        //homeMenu = new HomeMenu(this,new Dimension(450,300));
+        homeMenu = new HomeMenu(this,new Dimension(1000,750));
 
         this.add(homeMenu,BorderLayout.CENTER);
 
