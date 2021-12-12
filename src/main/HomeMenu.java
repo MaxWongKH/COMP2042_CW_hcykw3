@@ -332,7 +332,9 @@ public class HomeMenu extends JLayeredPane {
         this.add(infoButton, PALETTE_LAYER);
     }
 
-
+    /**
+     * enableInfo loads the info page with the info exit button
+     */
     public void enableInfo(){
         this.remove(menuBackground);
         this.remove(startButton);
