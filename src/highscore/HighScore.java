@@ -43,8 +43,8 @@ public class HighScore{
 
     /**
      * addScore loads the highscore file and adds a new score to the file then calls the updateScoreFile method
-     * @param name
-     * @param score
+     * @param name player name
+     * @param score player score
      */
     public void addScore(String name, int score) {
         loadScoreFile();
@@ -102,7 +102,7 @@ public class HighScore{
 
     /**
      * getHighscoreString returns the text on the highscore file
-     * @return
+     * @return highscore string
      */
     public String getHighscoreString() {
         String highScoreString = "";

@@ -8,7 +8,7 @@ public class Score implements Serializable {
 
     /**
      * getScore will get the score
-     * @return
+     * @return score
      */
     public int getScore() {
         return score;
@@ -16,7 +16,7 @@ public class Score implements Serializable {
 
     /**
      * getNaam will get the player name
-     * @return
+     * @return name
      */
     public String getNaam() {
         return naam;
@@ -24,8 +24,8 @@ public class Score implements Serializable {
 
     /**
      * Score takes in the name and score and stores it into a local variable to be used when the getters are called
-     * @param naam
-     * @param score
+     * @param naam player name
+     * @param score score
      */
     public Score(String naam, int score) {
         this.score = score;
