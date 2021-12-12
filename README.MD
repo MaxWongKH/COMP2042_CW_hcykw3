@@ -53,3 +53,6 @@ exit the info page and back to the Home Menu.
 I made a Home Menu backdrop with the button that are able to Start the game, exit the game, display info page, and display the high-score list
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+##Notes
+
+###At the start of the coursework only God and I know what I was doing. But now only God knows what I did.
