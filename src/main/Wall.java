@@ -271,10 +271,20 @@ public class Wall extends GameBoard {
         ball.setYSpeed(s);
     }
 
+    /**
+     * resetBallCount resets the ball count to 3
+     */
     public void resetBallCount(){
         ballCount = 3;
     }
 
+    /**
+     * makeBrick when call will make the brick type
+     * @param point brick location
+     * @param size size of the brick
+     * @param type the type of the brick
+     * @return the new instance of the brick type's class
+     */
     static Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){

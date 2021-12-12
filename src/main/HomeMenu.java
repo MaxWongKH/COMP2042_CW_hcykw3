@@ -69,7 +69,11 @@ public class HomeMenu extends JLayeredPane {
 
     JTextArea highScoreText = new JTextArea();
 
-
+    /**
+     * HomeMenu will create the main menu and displays all the button images and buttons with the menu backdrop
+     * @param owner refers backs to the GameFrame class
+     * @param area the size of the main menu frame
+     */
     public HomeMenu(GameFrame owner,Dimension area){
 
         this.setFocusable(true);
@@ -77,9 +81,11 @@ public class HomeMenu extends JLayeredPane {
         this.setLayout(null);
         this.setPreferredSize(area);
 
+        //sets the size and location of menu background
         menuBackground.setBounds(0,0,1000,750);
         menuBackground.setIcon(menuIcon);
 
+        //sets button size and location
         startButton.setBounds(397,210,206,65);
         startButton.setIcon(startBeforeIcon);
         startButton.addMouseListener(new MouseInputListener() {
@@ -88,7 +94,7 @@ public class HomeMenu extends JLayeredPane {
                 Point p = e.getPoint();
 
                 if(startButton.contains(p)){
-                    owner.enableGameBoard();
+                    owner.enableGameBoard(); //loads the GameBoard
                 }
             }
 
@@ -137,6 +143,7 @@ public class HomeMenu extends JLayeredPane {
             }
         });
 
+        //Creates the info button
         infoButton.setBounds(397,280,206,65);
         infoButton.setIcon(infoBeforeIcon);
         infoButton.addMouseListener(new MouseInputListener() {
