@@ -100,10 +100,7 @@ public class HighScore{
         }
     }
 
-    /**
-     * getHighscoreString returns the text on the highscore file
-     * @return highscore string
-     */
+
     public String getHighscoreString() {
         String highScoreString = "";
         int max = 10; //maximum display HighScore
