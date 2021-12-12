@@ -41,4 +41,4 @@ added to the game is **TitaniumBrick** which is similar to the **SteelBrick** bu
 ##Info Page
 I added an Info Page that can only be accessed in the main menu which briefly describes the objective of the Brick Breaker game. 
 
-##Home menu background
+##Home Menu background

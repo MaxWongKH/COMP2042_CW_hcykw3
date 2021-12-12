@@ -15,11 +15,7 @@ public class DiamondBrick extends Brick {
     private Crack crack;
     private Shape brickFace;
 
-    /**
-     * DiamondBrick creates the Diamond Brick
-     * @param point location of the brick placement
-     * @param size dimension of the brick
-     */
+
     public DiamondBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,DIAMOND_STRENGTH);
         crack = new Crack(DEF_CRACK_DEPTH,DEF_STEPS);
