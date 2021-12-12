@@ -28,12 +28,21 @@ public class RubberBall extends Ball {
     private static final Color DEF_INNER_COLOR = new Color(255, 219, 88);
     private static final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
 
-
+    /**
+     * RubberBall creates the ball when called
+     * @param center position of the ball
+     */
     public RubberBall(Point2D center){
         super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
     }
 
-
+    /**
+     * makeBall creates the Shape of the Ball
+     * @param center the spawn location of the ball
+     * @param radiusA size of the ball radius at X
+     * @param radiusB size of the ball radius at y
+     * @return the shape of the ball
+     */
     @Override
     protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
 

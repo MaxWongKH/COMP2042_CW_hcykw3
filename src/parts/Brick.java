@@ -42,26 +42,38 @@ abstract public class Brick  {
         private int crackDepth;
         private int steps;
 
-
+        /**
+         * Crack will create and instance of crack and insert the passed parameter into the local variables
+         * @param crackDepth
+         * @param steps
+         */
         public Crack(int crackDepth, int steps){
-
             crack = new GeneralPath();
             this.crackDepth = crackDepth;
             this.steps = steps;
 
         }
 
-
-
+        /**
+         * draw will return the crack
+         * @return crack
+         */
         public GeneralPath draw(){
-
             return crack;
         }
 
+        /**
+         * reset will reset the crack back to zero
+         */
         public void reset(){
             crack.reset();
         }
 
+        /**
+         * makeCrack will draw the crack lines on the brick with a crack function
+         * @param point position/point of impact
+         * @param direction the direction of impact
+         */
         protected void makeCrack(Point2D point, int direction){
             Rectangle bounds = Brick.this.brickFace.getBounds();
 
@@ -69,40 +81,43 @@ abstract public class Brick  {
             Point start = new Point();
             Point end = new Point();
 
-
             switch(direction){
                 case LEFT:
                     start.setLocation(bounds.x + bounds.width, bounds.y);
                     end.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
                     Point tmp = makeRandomPoint(start,end,VERTICAL);
-                    makeCrack(impact,tmp);
+                    drawCrack(impact,tmp);
 
                     break;
                 case RIGHT:
                     start.setLocation(bounds.getLocation());
                     end.setLocation(bounds.x, bounds.y + bounds.height);
                     tmp = makeRandomPoint(start,end,VERTICAL);
-                    makeCrack(impact,tmp);
+                    drawCrack(impact,tmp);
 
                     break;
                 case UP:
                     start.setLocation(bounds.x, bounds.y + bounds.height);
                     end.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
                     tmp = makeRandomPoint(start,end,HORIZONTAL);
-                    makeCrack(impact,tmp);
+                    drawCrack(impact,tmp);
                     break;
                 case DOWN:
                     start.setLocation(bounds.getLocation());
                     end.setLocation(bounds.x + bounds.width, bounds.y);
                     tmp = makeRandomPoint(start,end,HORIZONTAL);
-                    makeCrack(impact,tmp);
-
+                    drawCrack(impact,tmp);
                     break;
 
             }
         }
 
-        protected void makeCrack(Point start, Point end){
+        /**
+         * drawCrack will draw the cracked line/s
+         * @param start point of where the ball touches the brick
+         * @param end point of where the crack will end
+         */
+        protected void drawCrack(Point start, Point end){
 
             GeneralPath path = new GeneralPath();
 
@@ -133,11 +148,23 @@ abstract public class Brick  {
             crack.append(path,true);
         }
 
+        /**
+         * randomInBounds will randomize the in bounds
+         * @param bound bound
+         * @return bound
+         */
         private int randomInBounds(int bound){
             int n = (bound * 2) + 1;
             return rnd.nextInt(n) - bound;
         }
 
+        /**
+         * inMiddle returns the true if the crack is in the middle
+         * @param i
+         * @param steps
+         * @param divisions
+         * @return true if its in the middle
+         */
         private boolean inMiddle(int i,int steps,int divisions){
             int low = (steps / divisions);
             int up = low * (divisions - 1);
@@ -145,14 +172,26 @@ abstract public class Brick  {
             return  (i > low) && (i < up);
         }
 
+        /**
+         * jumps returns the in bounds
+         * @param bound the bound value
+         * @param probability the probability of the crack jump
+         * @return passes to the randomInBounds method or returns zero
+         */
         private int jumps(int bound,double probability){
-
             if(rnd.nextDouble() > probability)
                 return randomInBounds(bound);
             return  0;
 
         }
 
+        /**
+         * makeRandomPoint sets random points at the end of the crack
+         * @param from initial crack point
+         * @param to target crack end point
+         * @param direction direction of crack
+         * @return randomly generated end crack point
+         */
         private Point makeRandomPoint(Point from,Point to, int direction){
 
             Point out = new Point();
@@ -186,7 +225,17 @@ abstract public class Brick  {
 
     private boolean broken;
 
+    protected abstract Shape makeBrickFace(Point pos,Dimension size);
 
+    /**
+     * Brick will call to make the brickFace
+     * @param name brick name
+     * @param pos brick position
+     * @param size brick size
+     * @param border brick border color
+     * @param inner brick color
+     * @param strength brick's strength
+     */
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
         rnd = new Random();
         broken = false;
@@ -198,8 +247,12 @@ abstract public class Brick  {
 
     }
 
-    protected abstract Shape makeBrickFace(Point pos,Dimension size);
-
+    /**
+     * setImpact return the true or false on whether the brick is broken or not
+     * @param point
+     * @param dir
+     * @return
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
             return false;
@@ -207,19 +260,33 @@ abstract public class Brick  {
         return  broken;
     }
 
+    /**
+     * getBrick return the shape of the brick
+     * @return
+     */
     public abstract Shape getBrick();
 
-
-
+    /**
+     * getBorderColor will return the brick's border color
+     * @return the border color
+     */
     public Color getBorderColor(){
         return  border;
     }
 
+    /**
+     * getInnerColor return the brick's color
+     * @return the inner color of the brick
+     */
     public Color getInnerColor(){
         return inner;
     }
 
-
+    /**
+     * findImpact checks for the impact
+     * @param b Ball b
+     * @return impact value
+     */
     public final int findImpact(Ball b){
         if(broken)
             return 0;
@@ -235,20 +302,29 @@ abstract public class Brick  {
         return out;
     }
 
+    /**
+     * isBroken returns broken status if called
+     * @return broken status
+     */
     public final boolean isBroken(){
         return broken;
     }
 
+    /**
+     * repair will repair the brick to the original brick's strength and set the it back to a false broken status
+     */
     public void repair() {
         broken = false;
         strength = fullStrength;
     }
 
+    /**
+     * impact will decrease the strength of the brick when called
+     */
     public void impact(){
         strength--;
         broken = (strength == 0);
     }
-
 
 
 }

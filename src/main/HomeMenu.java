@@ -1,20 +1,4 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 package main;
 
 import highscore.HighScore;
@@ -143,7 +127,7 @@ public class HomeMenu extends JLayeredPane {
             }
         });
 
-        //Creates the info button
+        //set the info button size and location
         infoButton.setBounds(397,280,206,65);
         infoButton.setIcon(infoBeforeIcon);
         infoButton.addMouseListener(new MouseInputListener() {
@@ -152,7 +136,7 @@ public class HomeMenu extends JLayeredPane {
                 Point p = e.getPoint();
 
                 if(infoButton.contains(p)){
-                    enableInfo();
+                    enableInfo();//enableInfo to display the enableInfo
                 }
             }
 
@@ -202,9 +186,8 @@ public class HomeMenu extends JLayeredPane {
             }
         });
 
-
+        //sets the exit button size and location
         exitButton.setBounds(397,350,206,65);
-        //exitButton.setBounds((this.getWidth()/4)*3-exitButtonBefore.getWidth(null)/2,(this.getHeight()/4)*3-exitButtonBefore.getHeight(null)/2,206,65);
         exitButton.setIcon(exitBeforeIcon);
         exitButton.addMouseListener(new MouseInputListener() {
             @Override
@@ -212,7 +195,7 @@ public class HomeMenu extends JLayeredPane {
                 Point p = mouseEvent.getPoint();
 
                 if(exitButton.contains(p)){
-                    System.exit(0);
+                    System.exit(0); //stops the game
                 }
             }
 
@@ -264,7 +247,7 @@ public class HomeMenu extends JLayeredPane {
             }
         });
 
-
+        //sets HighScore button size and location
         highScoreButton.setBounds(397,420,206,65);
         highScoreButton.setIcon(hsBeforeIcon);
         highScoreButton.addMouseListener(new MouseInputListener() {
@@ -334,10 +317,13 @@ public class HomeMenu extends JLayeredPane {
             }
         });
 
-        enableMainMenu();
+        enableMainMenu(); //enable the main menu
 
     }
 
+    /**
+     * enableMainMenu will add all the buttons and background image
+     */
     public void enableMainMenu(){
         this.add(menuBackground, DEFAULT_LAYER);
         this.add(startButton, PALETTE_LAYER);
@@ -346,7 +332,9 @@ public class HomeMenu extends JLayeredPane {
         this.add(infoButton, PALETTE_LAYER);
     }
 
-
+    /**
+     * enableInfo loads the info page with the info exit button
+     */
     public void enableInfo(){
         this.remove(menuBackground);
         this.remove(startButton);
@@ -357,6 +345,7 @@ public class HomeMenu extends JLayeredPane {
         infoBackground.setBounds(0,0,1000,750);
         infoBackground.setIcon(infoIcon);
 
+        //set the size and location of info exit button
         exitInfo.setBounds(794,690,206,65);
         exitInfo.setIcon(exitBeforeIcon);
         exitInfo.addMouseListener(new MouseInputListener() {
@@ -427,10 +416,12 @@ public class HomeMenu extends JLayeredPane {
         this.add(infoBackground,POPUP_LAYER);
         this.add(exitInfo, DRAG_LAYER);
 
-
     }
 
-
+    /**
+     * enableHighScore will display HighScore
+     * @throws IOException
+     */
     public void enableHighScore() throws IOException {
         this.remove(menuBackground);
         this.remove(startButton);
@@ -513,6 +504,7 @@ public class HomeMenu extends JLayeredPane {
 
         this.add(exitHS, DRAG_LAYER);
 
+        //displays HighScore
         highScoreText.setSize(300, 200);
         highScoreText.setLocation(300,200);
 

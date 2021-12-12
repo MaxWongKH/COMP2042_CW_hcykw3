@@ -33,23 +33,43 @@ public class SteelBrick extends Brick {
     private Random rnd;
     private Shape brickFace;
 
+    /**
+     * SteelBrick creates the Steel Brick
+     * @param point the position of the brick placement
+     * @param size dimension of brick
+     */
     public SteelBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         rnd = new Random();
         brickFace = super.brickFace;
     }
 
-
+    /**
+     * makeBrickFace will create the shape of the brick
+     * @param pos the position of the brick placement
+     * @param size dimension of the brick
+     * @return shape of brick
+     */
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
+    /**
+     * getBrick returns the brick's face
+     * @return brickFace
+     */
     @Override
     public Shape getBrick() {
         return brickFace;
     }
 
+    /**
+     * setImpact checks if its broken and updates the brick
+     * @param point the location of impact on the brick
+     * @param dir direction of impact
+     * @return setImpact status
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(super.isBroken())
             return false;
@@ -57,6 +77,9 @@ public class SteelBrick extends Brick {
         return  super.isBroken();
     }
 
+    /**
+     * impact randomize a value and compare with the Steal's break probability. If the impact is less than the steel breaking probability it will not break the brick.
+     */
     public void impact(){
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();
