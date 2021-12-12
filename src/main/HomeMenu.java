@@ -418,10 +418,7 @@ public class HomeMenu extends JLayeredPane {
 
     }
 
-    /**
-     * enableHighScore will display HighScore
-     * @throws IOException
-     */
+
     public void enableHighScore() throws IOException {
         this.remove(menuBackground);
         this.remove(startButton);
