@@ -3,6 +3,8 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 #REFACTOR
 
+
+
 ##Organizing Into Meaningful Packages
 
 Moving the classes into separate packages allows the programmer to be more organized. In my case I placed the classes into new packages 
@@ -27,6 +29,8 @@ I did not need any of the old codes. Another example being, a bunch of libraries
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 #ADDITION
+
+
 
 ##Permanent High-score List
 
