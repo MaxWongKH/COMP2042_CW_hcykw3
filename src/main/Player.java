@@ -36,7 +36,13 @@ public class Player {
     private int min;
     private int max;
 
-
+    /**
+     * Player is the paddle of the game
+     * @param ballPoint
+     * @param width
+     * @param height
+     * @param container
+     */
     public Player(Point ballPoint,int width,int height,Rectangle container) {
         this.ballPoint = ballPoint;
         moveAmount = 0;
@@ -46,15 +52,29 @@ public class Player {
 
     }
 
+    /**
+     * makeRectangle will created the box which is the paddle
+     * @param width width of the paddle
+     * @param height height of paddle
+     * @return the dimensions of the rectangle
+     */
     private Rectangle makeRectangle(int width,int height){
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
     }
 
+    /**
+     * impact will check if it impacted the paddle
+     * @param b ball object
+     * @return the ball contacting the paddle
+     */
     public boolean impact(Ball b){
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.down) ;
     }
 
+    /**
+     * move will set the paddle back where the ball restarts
+     */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
@@ -63,22 +83,39 @@ public class Player {
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
 
+    /**
+     * moveLeft moves the paddle left
+     */
     public void moveLeft(){
         moveAmount = -DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * movRight moves the paddle right
+     */
     public void movRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * stop doesn't move the paddle and stays at the position it stopped
+     */
     public void stop(){
         moveAmount = 0;
     }
 
+    /**
+     * getPlayerFace displays the paddle
+     * @return the paddle object
+     */
     public Shape getPlayerFace(){
         return  playerFace;
     }
 
+    /**
+     * moveTo moves the paddle back to the ball's position
+     * @param p
+     */
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);

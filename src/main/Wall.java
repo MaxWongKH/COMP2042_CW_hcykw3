@@ -29,9 +29,6 @@ import java.util.Random;
 
 public class Wall extends GameBoard {
 
-    /*
-    private static final int LEVELS_COUNT = 4;
-*/
     protected static final int CLAY = 1;
     protected static final int STEEL = 2;
     protected static final int CEMENT = 3;
@@ -41,26 +38,28 @@ public class Wall extends GameBoard {
     private static int brickCount;
     public int score = 0;
     private static int level;
-//    private static Brick[] bricks;
+
     private static Brick[][] levels;
-
-
 
     private Random rnd;
     private Rectangle area;
-
 
     Ball ball;
     Player player;
 
     private Point startPoint;
 
-
     private int ballCount;
     private boolean ballLost;
 
-
-
+    /**
+     * Wall is the border of the game
+     * @param drawArea size of the game console
+     * @param brickCount the amount of bricks
+     * @param lineCount the amount of lines
+     * @param brickDimensionRatio size of the brick
+     * @param ballPos the position of the ball
+     */
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
         super();
 
@@ -69,8 +68,6 @@ public class Wall extends GameBoard {
         levels = Levels.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
 
-
-
         ballCount = 3;
         ballLost = false;
 
@@ -78,9 +75,7 @@ public class Wall extends GameBoard {
 
         makeBall(ballPos);
 
-
         int xSpeed ,ySpeed;
-
 
         do{
             xSpeed = 4;
@@ -89,125 +84,33 @@ public class Wall extends GameBoard {
             ySpeed = -4;
         }while(ySpeed == 0);
 
-
-
-
         ball.setSpeed(xSpeed,ySpeed);
 
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
 
         area = drawArea;
 
-
     }
 
-/*
-    private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
-        /*
-          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
-          multiple of lineCount smaller then brickCount
-         */
-    /*
-        brickCnt -= brickCnt % lineCnt;
-
-        int brickOnLine = brickCnt / lineCnt;
-
-        double brickLen = drawArea.getWidth() / brickOnLine;
-        double brickHgt = brickLen / brickSizeRatio;
-
-        brickCnt += lineCnt / 2;
-
-        Brick[] tmp  = new Brick[brickCnt];
-
-        Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
-        Point p = new Point();
-
-        int i;
-        for(i = 0; i < tmp.length; i++){
-            int line = i / brickOnLine;
-            if(line == lineCnt)
-                break;
-            double x = (i % brickOnLine) * brickLen;
-            x =(line % 2 == 0) ? x : (x - (brickLen / 2));
-            double y = (line) * brickHgt;
-            p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,type);
-        }
-
-        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
-            double x = (brickOnLine * brickLen) - (brickLen / 2);
-            p.setLocation(x,y);
-            tmp[i] = new ClayBrick(p,brickSize);
-        }
-        return tmp;
-
-    }
-
-    private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
-        /*
-          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
-          multiple of lineCount smaller then brickCount
-         */
-    /*
-        brickCnt -= brickCnt % lineCnt;
-
-        int brickOnLine = brickCnt / lineCnt;
-
-        int centerLeft = brickOnLine / 2 - 1;
-        int centerRight = brickOnLine / 2 + 1;
-
-        double brickLen = drawArea.getWidth() / brickOnLine;
-        double brickHgt = brickLen / brickSizeRatio;
-
-        brickCnt += lineCnt / 2;
-
-        Brick[] tmp  = new Brick[brickCnt];
-
-        Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
-        Point p = new Point();
-
-        int i;
-        for(i = 0; i < tmp.length; i++){
-            int line = i / brickOnLine;
-            if(line == lineCnt)
-                break;
-            int posX = i % brickOnLine;
-            double x = posX * brickLen;
-            x =(line % 2 == 0) ? x : (x - (brickLen / 2));
-            double y = (line) * brickHgt;
-            p.setLocation(x,y);
-
-            boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
-        }
-
-        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
-            double x = (brickOnLine * brickLen) - (brickLen / 2);
-            p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,typeA);
-        }
-        return tmp;
-    }
-*/
-
+    /**
+     * makeBall will created the ball when called
+     * @param ballPos the initial position of the ball
+     */
    private void makeBall(Point2D ballPos){
         ball = new RubberBall(ballPos);
     }
-/*
-    private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
-        Brick[][] tmp = new Brick[LEVELS_COUNT][];
-        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
-        return tmp;
-    }
-*/
+
+    /**
+     * move will move the ball and the player will move when called
+     */
     public void move(){
         player.move();
         ball.move();
     }
 
+    /**
+     * findImpacts finds the if the ball impact brick
+     */
     public void findImpacts(){
         if(player.impact(ball)){
             ball.reverseY();
@@ -231,6 +134,10 @@ public class Wall extends GameBoard {
         }
     }
 
+    /**
+     * impactWall set the ball's direction to certain direction
+     * @return false to re-initial the impactWall when it gets called again
+     */
     private boolean impactWall(){
         for(Brick b : bricks){
             switch(b.findImpact(ball)) {
@@ -254,17 +161,27 @@ public class Wall extends GameBoard {
         return false;
     }
 
+    /**
+     * impactBoarder will check if the ball hit the wall
+     * @return the true if it hits the wall
+     */
     private boolean impactBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
-
+    /**
+     * getBrickCount will return the brickCount
+     * @return brickCount
+     */
     public static int getBrickCount(){
         return brickCount;
     }
 
-
+    /**
+     *
+     * @return
+     */
     public int getBallCount(){
         return ballCount;
     }

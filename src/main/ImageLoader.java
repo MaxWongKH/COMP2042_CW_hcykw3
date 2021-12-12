@@ -18,9 +18,10 @@ public class ImageLoader {
     public static String infoBackground = "/infoPage.png";
     public static String highScoreBackground = "/highscoreBackground.png";
 
-
-
-
+    /**
+     * ImageLoader loads the image into img
+     * @param path The name of the file
+     */
     public ImageLoader(String path) {
         try {
             img = ImageIO.read(ImageLoader.class.getResourceAsStream(path));
@@ -29,13 +30,13 @@ public class ImageLoader {
             e.printStackTrace();
         }
     }
+
+    /**
+     * getImage will retrieve when called
+     * @return image of that's called
+     */
     public BufferedImage getImage() {
         return img;
     }
 
-    /*
-    public BufferedImage getSubImage(int section) {
-        return img.getSubimage(0, section*25, 50, 25);
-    }
-    */
 }

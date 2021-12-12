@@ -31,11 +31,11 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     private HomeMenu homeMenu;
     private Dimension gameDimension;
 
-
-
-
     private boolean gaming;
 
+    /**
+     * GameFrame will set the gameDimension and add the homeMenu background
+     */
     public GameFrame(){
         super();
 
@@ -45,17 +45,17 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLayout(new BorderLayout());
 
         gameBoard = new GameBoard(this, gameDimension);
-
         homeMenu = new HomeMenu(this, gameDimension);
-        //homeMenu = new HomeMenu(this, new Dimension(500,200));
 
         this.add(homeMenu,BorderLayout.CENTER);
 
         this.setUndecorated(true);
 
-
     }
 
+    /**
+     * initialize will initialize the game console boarder
+     */
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -64,6 +64,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setVisible(true);
     }
 
+    /**
+     * enableGameBoard will call the gameBoard and initialize it
+     */
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
@@ -75,8 +78,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
 
-
-
+    /**
+     * autoLocate locates the center of screen
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;
@@ -84,7 +88,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLocation(x,y);
     }
 
-
+    /**
+     * windowGainedFocus overrides windEvent
+     * @param windowEvent windowEvent object
+     */
     @Override
     public void windowGainedFocus(WindowEvent windowEvent) {
         /*
@@ -98,6 +105,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         gaming = true;
     }
 
+    /**
+     * windowLostFocus overrides windowEvent
+     * @param windowEvent windowEvent object
+     */
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)

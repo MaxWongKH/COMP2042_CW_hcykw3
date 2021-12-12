@@ -447,6 +447,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     }
 
+    /**
+     * mouseMoved overrides mouseEvent
+     * @param mouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -461,6 +465,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         }
     }
 
+    /**
+     * onLostFocus clicked out of game console it will display message
+     */
     public void onLostFocus(){
         gameTimer.stop();
         message = "Focus Lost";

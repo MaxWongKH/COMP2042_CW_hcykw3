@@ -9,17 +9,20 @@ public class Levels extends Wall {
 
     private static final int LEVELS_COUNT = 9;
 
-
-
-
-
-
     public Levels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos) {
         super(drawArea, brickCount, lineCount, brickDimensionRatio, ballPos);
     }
 
-
-
+    /**
+     * makeGameLevel will create the look of the game level
+     * @param drawArea dimension of the brick
+     * @param brickCnt stores the brick count
+     * @param lineCnt stores the line count
+     * @param brickSizeRatio ratio of brick size
+     * @param typeA brick type A
+     * @param typeB brick type B
+     * @return the brick
+     */
     private static Brick[] makeGameLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -66,6 +69,14 @@ public class Levels extends Wall {
         return tmp;
     }
 
+    /**
+     * makeLevels make the playable levels in the game
+     * @param drawArea dimension of brick
+     * @param brickCount stores the brick count
+     * @param lineCount stores line count
+     * @param brickDimensionRatio the ratio of the brick's dimension
+     * @return array of bricks forming the brick wall
+     */
     public static Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeGameLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY, CLAY);

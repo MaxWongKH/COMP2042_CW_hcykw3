@@ -21,7 +21,10 @@ import java.awt.*;
 
 
 public class GraphicsMain {
-
+    /**
+     * Starts the game
+     * @param args
+     */
     public static void main(String[] args){
         EventQueue.invokeLater(() -> new GameFrame().initialize());
     }

@@ -28,41 +28,6 @@ import java.io.IOException;
 
 public class HomeMenu extends JLayeredPane {
 
-/*
-    private static final String GREETINGS = "Welcome to:";
-    private static final String GAME_TITLE = "BRICK DESTROYER";
-    private static final String CREDITS = "Version 0.1";
-    private static final String START_TEXT = "Start";
-    private static final String MENU_TEXT = "Exit";
-
-    private static final Color BG_COLOR = Color.BLACK.darker();
-    private static final Color TEXT_COLOR = new Color(16, 52, 166);//egyptian blue
-    private static final Color CLICKED_BUTTON_COLOR = BG_COLOR.brighter();
-    private static final Color CLICKED_TEXT = Color.WHITE;
-    private static final int BORDER_SIZE = 5;
-    private static final float[] DASHES = {12,6};
-
-    private Rectangle menuFace;
-    //private Rectangle startButton;
-    private Rectangle menuButton;
-
-
-    private BasicStroke borderStoke;
-    private BasicStroke borderStoke_noDashes;
-
-    private Font greetingsFont;
-    private Font gameTitleFont;
-    private Font creditsFont;
-    private Font buttonFont;
-
-
-
-
-    private boolean startClicked;
-    private boolean menuClicked;
-*/
-    //private GameFrame owner;
-
     private JLabel menuBackground = new JLabel();
     private Image mainMenuBackground = new ImageLoader(ImageLoader.mainMenuBackground).getImage();
     private ImageIcon menuIcon = new ImageIcon(mainMenuBackground);
@@ -107,30 +72,6 @@ public class HomeMenu extends JLayeredPane {
 
     public HomeMenu(GameFrame owner,Dimension area){
 
-
-        //this.setSize(area);
-        //this.setPreferredSize(area);
-/*
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
-*/
-
-        //this.owner = owner;
-
-
-
-        //menuFace = new Rectangle(new Point(0,0),area);
-        //mainMenuBackground = new ImageLoader(ImageLoader.mainMenuBackground).getImage();
-        //menuIcon = new ImageIcon(mainMenuBackground);
-        //infoPage = new ImageLoader(ImageLoader.infoBackground).getImage();
-
-        //startButtonBefore = new ImageLoader(ImageLoader.startButtonBefore).getImage();
-        //startButtonAfter = new ImageLoader(ImageLoader.startButtonAfter).getImage();
-
-
-
-
-
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setLayout(null);
@@ -140,7 +81,6 @@ public class HomeMenu extends JLayeredPane {
         menuBackground.setIcon(menuIcon);
 
         startButton.setBounds(397,210,206,65);
-        //startButton.setBounds(this.getWidth()/4-startButtonBefore.getWidth(null)/2,this.getHeight()/4-startButtonBefore.getHeight(null)/2,206,65);
         startButton.setIcon(startBeforeIcon);
         startButton.addMouseListener(new MouseInputListener() {
             @Override
@@ -198,7 +138,6 @@ public class HomeMenu extends JLayeredPane {
         });
 
         infoButton.setBounds(397,280,206,65);
-        //infoButton.setBounds((this.getWidth()/4)*3-infoButtonBefore.getWidth(null)/2,this.getHeight()/4-infoButtonBefore.getHeight(null)/2,206,65);
         infoButton.setIcon(infoBeforeIcon);
         infoButton.addMouseListener(new MouseInputListener() {
             @Override
@@ -320,7 +259,6 @@ public class HomeMenu extends JLayeredPane {
 
 
         highScoreButton.setBounds(397,420,206,65);
-        //highScoreButton.setBounds(this.getWidth()/4-scoresbuttonsprite.getIconWidth()/2,(this.getHeight()/4)*3-scoresbuttonsprite.getIconHeight()/2,200,60);
         highScoreButton.setIcon(hsBeforeIcon);
         highScoreButton.addMouseListener(new MouseInputListener() {
             @Override
@@ -389,9 +327,7 @@ public class HomeMenu extends JLayeredPane {
             }
         });
 
-
         enableMainMenu();
-
 
     }
 
@@ -402,29 +338,6 @@ public class HomeMenu extends JLayeredPane {
         this.add(highScoreButton, PALETTE_LAYER);
         this.add(infoButton, PALETTE_LAYER);
     }
-
-
-
-/*
-        Dimension btnDim = new Dimension(area.width / 3, area.height / 12);
-        startButton = new Rectangle(btnDim);
-        menuButton = new Rectangle(btnDim);
-*/
-
-/*
-
-        borderStoke = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND,0,DASHES,0);
-        borderStoke_noDashes = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
-
-*/
-
-/*
-        greetingsFont = new Font("Noto Mono",Font.PLAIN,25);
-        gameTitleFont = new Font("Noto Mono",Font.BOLD,40);
-        creditsFont = new Font("Monospaced",Font.PLAIN,10);
-        buttonFont = new Font("Monospaced",Font.PLAIN,startButton.height-2);
-
-*/
 
 
     public void enableInfo(){
@@ -438,7 +351,6 @@ public class HomeMenu extends JLayeredPane {
         infoBackground.setIcon(infoIcon);
 
         exitInfo.setBounds(794,690,206,65);
-        //exitButton.setBounds((this.getWidth()/4)*3-exitButtonBefore.getWidth(null)/2,(this.getHeight()/4)*3-exitButtonBefore.getHeight(null)/2,206,65);
         exitInfo.setIcon(exitBeforeIcon);
         exitInfo.addMouseListener(new MouseInputListener() {
             @Override
@@ -512,7 +424,6 @@ public class HomeMenu extends JLayeredPane {
     }
 
 
-
     public void enableHighScore() throws IOException {
         this.remove(menuBackground);
         this.remove(startButton);
@@ -524,10 +435,7 @@ public class HomeMenu extends JLayeredPane {
         hsBackground.setIcon(hsIcon);
         this.add(hsBackground, POPUP_LAYER);
 
-
-
         exitHS.setBounds(794,690,206,65);
-        //exitButton.setBounds((this.getWidth()/4)*3-exitButtonBefore.getWidth(null)/2,(this.getHeight()/4)*3-exitButtonBefore.getHeight(null)/2,206,65);
         exitHS.setIcon(exitBeforeIcon);
         exitHS.addMouseListener(new MouseInputListener() {
             @Override
@@ -598,389 +506,13 @@ public class HomeMenu extends JLayeredPane {
 
         this.add(exitHS, DRAG_LAYER);
 
-
         highScoreText.setSize(300, 200);
         highScoreText.setLocation(300,200);
 
         HighScore hs = new HighScore();
-        //highScoreText.setFont();
         highScoreText.setText(hs.getHighscoreString());
         this.add(highScoreText, DRAG_LAYER);
 
-
-
     }
 
-
-/*
-
-
-    public void paint(Graphics g){
-
-        drawMenu((Graphics2D)g);
-
-    }
-
-
-    public void drawMenu(Graphics2D g2d){
-
-        drawContainer(g2d);
-        g2d.drawImage(mainMenuBackground,0,0,null);
-
-*/
-/*
-        all the following method calls need a relative
-        painting directly into the HomeMenu rectangle,
-        so the translation is made here so the other methods do not do that.
-         *//*
-
-
-        Color prevColor = g2d.getColor();
-        Font prevFont = g2d.getFont();
-
-        double x = menuFace.getX();
-        double y = menuFace.getY();
-
-        g2d.translate(x,y);
-
-        //methods calls
-        //drawText(g2d);
-        //drawButton(g2d);
-        //end of methods calls
-
-        g2d.translate(-x,-y);
-        g2d.setFont(prevFont);
-        g2d.setColor(prevColor);
-
-
-    }
-
-    private void drawContainer(Graphics2D g2d){
-        Color prev = g2d.getColor();
-
-        g2d.setColor(BG_COLOR);
-        g2d.fill(menuFace);
-
-        Stroke tmp = g2d.getStroke();
-
-        g2d.setStroke(borderStoke_noDashes);
-        //g2d.setColor(DASH_BORDER_COLOR);
-        g2d.draw(menuFace);
-
-
-        g2d.setStroke(borderStoke);
-        //g2d.setColor(BORDER_COLOR);
-        g2d.draw(menuFace);
-
-
-        g2d.setStroke(tmp);
-
-        g2d.setColor(prev);
-    }
-
-*/
-
-/*
-    private void drawText(Graphics2D g2d){
-
-        g2d.setColor(TEXT_COLOR);
-
-        FontRenderContext frc = g2d.getFontRenderContext();
-
-        Rectangle2D greetingsRect = greetingsFont.getStringBounds(GREETINGS,frc);
-        Rectangle2D gameTitleRect = gameTitleFont.getStringBounds(GAME_TITLE,frc);
-        Rectangle2D creditsRect = creditsFont.getStringBounds(CREDITS,frc);
-
-        int sX,sY;
-
-        sX = (int)(menuFace.getWidth() - greetingsRect.getWidth()) / 2;
-        sY = (int)(menuFace.getHeight() / 4);
-
-        g2d.setFont(greetingsFont);
-        g2d.drawString(GREETINGS,sX,sY);
-
-        sX = (int)(menuFace.getWidth() - gameTitleRect.getWidth()) / 2;
-        sY += (int) gameTitleRect.getHeight() * 1.1;//add 10% of String height between the two strings
-
-        g2d.setFont(gameTitleFont);
-        g2d.drawString(GAME_TITLE,sX,sY);
-
-        sX = (int)(menuFace.getWidth() - creditsRect.getWidth()) / 2;
-        sY += (int) creditsRect.getHeight() * 1.1;
-
-        g2d.setFont(creditsFont);
-        g2d.drawString(CREDITS,sX,sY);
-
-
-    }
-*/
-/*
-
-    private void drawButton(Graphics2D g2d){
-
-        FontRenderContext frc = g2d.getFontRenderContext();
-
-        Rectangle2D txtRect = buttonFont.getStringBounds(START_TEXT,frc);
-        Rectangle2D mTxtRect = buttonFont.getStringBounds(MENU_TEXT,frc);
-
-        g2d.setFont(buttonFont);
-
-        int x = (menuFace.width - startButton.width) / 2;
-        int y =(int) ((menuFace.height - startButton.height) * 0.8);
-
-        startButton.setLocation(x,y);
-
-        x = (int)(startButton.getWidth() - txtRect.getWidth()) / 2;
-        y = (int)(startButton.getHeight() - txtRect.getHeight()) / 2;
-
-        x += startButton.x;
-        y += startButton.y + (startButton.height * 0.9);
-
-
-
-
-        if(startClicked){
-            Color tmp = g2d.getColor();
-            g2d.setColor(CLICKED_BUTTON_COLOR);
-            g2d.draw(startButton);
-            g2d.setColor(CLICKED_TEXT);
-            g2d.drawString(START_TEXT,x,y);
-            g2d.setColor(tmp);
-        }
-        else{
-            g2d.draw(startButton);
-            g2d.drawString(START_TEXT,x,y);
-        }
-
-        x = startButton.x;
-        y = startButton.y;
-
-        y *= 1.2;
-
-        menuButton.setLocation(x,y);
-
-
-
-
-        x = (int)(menuButton.getWidth() - mTxtRect.getWidth()) / 2;
-        y = (int)(menuButton.getHeight() - mTxtRect.getHeight()) / 2;
-
-        x += menuButton.x;
-        y += menuButton.y + (startButton.height * 0.9);
-
-        if(menuClicked){
-            Color tmp = g2d.getColor();
-
-            g2d.setColor(CLICKED_BUTTON_COLOR);
-            g2d.draw(menuButton);
-            g2d.setColor(CLICKED_TEXT);
-            g2d.drawString(MENU_TEXT,x,y);
-            g2d.setColor(tmp);
-        }
-        else{
-            g2d.draw(menuButton);
-            g2d.drawString(MENU_TEXT,x,y);
-        }
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p)){
-           owner.enableGameBoard();
-
-        }
-        else if(menuButton.contains(p)){
-            System.out.println("Goodbye " + System.getProperty("user.name"));
-            System.exit(0);
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p)){
-            startClicked = true;
-            repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
-
-        }
-        else if(menuButton.contains(p)){
-            menuClicked = true;
-            repaint(menuButton.x,menuButton.y,menuButton.width+1,menuButton.height+1);
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-        if(startClicked ){
-            startClicked = false;
-            repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
-        }
-        else if(menuClicked){
-            menuClicked = false;
-            repaint(menuButton.x,menuButton.y,menuButton.width+1,menuButton.height+1);
-        }
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
-
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p) || menuButton.contains(p))
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        else
-            this.setCursor(Cursor.getDefaultCursor());
-
-    }
-
-*/
-
-/*    private void drawButton(Graphics2D g2d){
-        startButton.setBounds(this.getWidth()/4-startButtonBefore.getWidth(null)/2,this.getHeight()/4-startButtonBefore.getHeight(null)/2,200,60);
-        g2d.drawImage(startButtonBefore,0,0,null);
-        startButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                if(startButton.contains(p)){
-                    owner.enableGameBoard();
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                if(startButton.contains(p)){
-                    g2d.drawImage(startButtonAfter,0,0,null);
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                g2d.drawImage(startButtonBefore,0,0,null);
-                if(startButton.contains(p)){
-                    owner.enableGameBoard();
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-
-            }
-
-
-*//*            @Override
-            public void mouseDragged(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                if(startButton.contains(p)){
-                    g2d.drawImage(startButtonAfter,0,0,null);
-                }else{
-                    g2d.drawImage(startButtonBefore,0,0,null);
-                }
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent mouseEvent) {
-
-            }*//*
-        });
-
-        exitButton.setBounds((this.getWidth()/4)*3-exitButtonBefore.getWidth(null)/2,(this.getHeight()/4)*3-exitButtonBefore.getHeight(null)/2,200,60);
-        g2d.drawImage(exitButtonBefore,0,0,null);
-        exitButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                if(exitButton.contains(p)){
-                    System.exit(0);
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                if(exitButton.contains(p)){
-                    g2d.drawImage(exitButtonAfter,0,0,null);
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                g2d.drawImage(exitButtonBefore,0,0,null);
-                if(exitButton.contains(p)){
-                    System.exit(0);
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-
-            }
-
-
-*//*            @Override
-            public void mouseDragged(MouseEvent mouseEvent) {
-                Point p = mouseEvent.getPoint();
-
-                if(exitButton.contains(p)){
-                    g2d.drawImage(exitButtonAfter,0,0,null);
-                }else{
-                    g2d.drawImage(exitButtonBefore,0,0,null);
-                }
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent mouseEvent) {
-
-            }*//*
-        });
-    }
-
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }*/
 }
