@@ -179,17 +179,24 @@ public class Wall extends GameBoard {
     }
 
     /**
-     *
-     * @return
+     *getBallCount will return the ballCount
+     * @return ballCount
      */
     public int getBallCount(){
         return ballCount;
     }
 
+    /**
+     * isBallLost will result ballLost
+     * @return ballLost
+     */
     public boolean isBallLost(){
         return ballLost;
     }
 
+    /**
+     * ballReset resets the ball speed
+     */
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
@@ -205,7 +212,9 @@ public class Wall extends GameBoard {
         ballLost = false;
     }
 
-
+    /**
+     * wallReset will reset the wall
+     */
     public void wallReset(){
         for(Brick b : bricks)
             b.repair();
@@ -213,32 +222,51 @@ public class Wall extends GameBoard {
         ballCount = 3;
     }
 
-
+    /**
+     * ballEnd return true if the ballCount is zero
+     * @return true if ballCount is zero
+     */
     public boolean ballEnd(){
         return ballCount == 0;
     }
 
+    /**
+     * isDone return true if ballCount is zero
+     * @return true if ballCount is zero
+     */
     public boolean isDone(){
         return brickCount == 0;
     }
 
 
-
+    /**
+     * nextLevel will move to the next level and reset the bricks
+     */
     public static void nextLevel(){
         bricks = levels[level++];
         brickCount = bricks.length;
     }
 
-
+    /**
+     * hasLevel will return true if
+     * @return
+     */
     public static boolean hasLevel(){
         return level < levels.length;
     }
 
-
+    /**
+     * setBallXSpeed sets the x speed of the ball
+     * @param s the speed value
+     */
     public void setBallXSpeed(int s){
         ball.setXSpeed(s);
     }
 
+    /**
+     * setBallYSpeed sets the x speed of the ball
+     * @param s the speed value
+     */
     public void setBallYSpeed(int s){
         ball.setYSpeed(s);
     }
