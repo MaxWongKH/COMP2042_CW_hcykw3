@@ -69,14 +69,7 @@ public class Levels extends Wall {
         return tmp;
     }
 
-    /**
-     * makeLevels make the playable levels in the game
-     * @param drawArea dimension of brick
-     * @param brickCount stores the brick count
-     * @param lineCount stores line count
-     * @param brickDimensionRatio the ratio of the brick's dimension
-     * @return array of bricks forming the brick wall
-     */
+
     public static Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeGameLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY, CLAY);

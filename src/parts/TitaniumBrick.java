@@ -15,7 +15,11 @@ public class TitaniumBrick extends Brick {
     private Random rnd;
     private Shape brickFace;
 
-
+    /**
+     * TitaniumBrick creates the titanium brick
+     * @param point the location of brick placement
+     * @param size the dimension of the brick
+     */
     public TitaniumBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,TITANIUM_STRENGTH);
         rnd = new Random();
