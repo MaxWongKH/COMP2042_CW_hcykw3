@@ -18,41 +18,58 @@
 package main;
 
 import parts.*;
+import parts.Ball;
+import parts.Brick;
+import parts.CementBrick;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
 
-public class Wall {
+public class Wall extends GameBoard {
 
+    /*
     private static final int LEVELS_COUNT = 4;
+*/
+    protected static final int CLAY = 1;
+    protected static final int STEEL = 2;
+    protected static final int CEMENT = 3;
+    protected static final int TITANIUM = 4;
+    protected static final int DIAMOND = 5;
 
-    private static final int CLAY = 1;
-    private static final int STEEL = 2;
-    private static final int CEMENT = 3;
+    private static int brickCount;
+    public int score = 0;
+    private static int level;
+//    private static Brick[] bricks;
+    private static Brick[][] levels;
+
+
 
     private Random rnd;
     private Rectangle area;
 
-    Brick[] bricks;
+
     Ball ball;
     Player player;
 
-    private Brick[][] levels;
-    private int level;
-
     private Point startPoint;
-    private int brickCount;
+
+
     private int ballCount;
     private boolean ballLost;
 
+
+
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
+        super();
 
         this.startPoint = new Point(ballPos);
 
-        levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
+        levels = Levels.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
+
+
 
         ballCount = 3;
         ballLost = false;
@@ -60,15 +77,22 @@ public class Wall {
         rnd = new Random();
 
         makeBall(ballPos);
-        int speedX,speedY;
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
 
-        ball.setSpeed(speedX,speedY);
+
+        int xSpeed ,ySpeed;
+
+
+        do{
+            xSpeed = 4;
+        }while(xSpeed == 0);
+        do{
+            ySpeed = -4;
+        }while(ySpeed == 0);
+
+
+
+
+        ball.setSpeed(xSpeed,ySpeed);
 
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
 
@@ -77,11 +101,13 @@ public class Wall {
 
     }
 
+/*
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
          */
+    /*
         brickCnt -= brickCnt % lineCnt;
 
         int brickOnLine = brickCnt / lineCnt;
@@ -122,6 +148,7 @@ public class Wall {
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
          */
+    /*
         brickCnt -= brickCnt % lineCnt;
 
         int brickOnLine = brickCnt / lineCnt;
@@ -161,11 +188,12 @@ public class Wall {
         }
         return tmp;
     }
+*/
 
-    private void makeBall(Point2D ballPos){
+   private void makeBall(Point2D ballPos){
         ball = new RubberBall(ballPos);
     }
-
+/*
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
@@ -174,7 +202,7 @@ public class Wall {
         tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
         return tmp;
     }
-
+*/
     public void move(){
         player.move();
         ball.move();
@@ -189,6 +217,7 @@ public class Wall {
             * because for every brick program checks for horizontal and vertical impacts
             */
             brickCount--;
+            score += 100;
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -230,9 +259,11 @@ public class Wall {
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
-    public int getBrickCount(){
+
+    public static int getBrickCount(){
         return brickCount;
     }
+
 
     public int getBallCount(){
         return ballCount;
@@ -245,17 +276,18 @@ public class Wall {
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
-        int speedX,speedY;
+        int xSpeed, ySpeed;
         do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
+            xSpeed = 4;
+        }while(xSpeed == 0);
         do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
+            ySpeed = -4;
+        }while(ySpeed == 0);
 
-        ball.setSpeed(speedX,speedY);
+        ball.setSpeed(xSpeed,ySpeed);
         ballLost = false;
     }
+
 
     public void wallReset(){
         for(Brick b : bricks)
@@ -263,6 +295,7 @@ public class Wall {
         brickCount = bricks.length;
         ballCount = 3;
     }
+
 
     public boolean ballEnd(){
         return ballCount == 0;
@@ -272,14 +305,18 @@ public class Wall {
         return brickCount == 0;
     }
 
-    public void nextLevel(){
+
+
+    public static void nextLevel(){
         bricks = levels[level++];
-        this.brickCount = bricks.length;
+        brickCount = bricks.length;
     }
 
-    public boolean hasLevel(){
+
+    public static boolean hasLevel(){
         return level < levels.length;
     }
+
 
     public void setBallXSpeed(int s){
         ball.setXSpeed(s);
@@ -293,7 +330,7 @@ public class Wall {
         ballCount = 3;
     }
 
-    private Brick makeBrick(Point point, Dimension size, int type){
+    static Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
             case CLAY:
@@ -304,6 +341,12 @@ public class Wall {
                 break;
             case CEMENT:
                 out = new CementBrick(point, size);
+                break;
+            case TITANIUM:
+                out = new TitaniumBrick(point, size);
+                break;
+            case DIAMOND:
+                out = new DiamondBrick(point, size);
                 break;
             default:
                 throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));

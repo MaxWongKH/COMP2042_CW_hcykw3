@@ -4,11 +4,8 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
-/**
- * Created by filippo on 04/09/16.
- *
- */
 abstract public class Ball {
+
 
     private Shape ballFace;
 
@@ -22,8 +19,11 @@ abstract public class Ball {
     private Color border;
     private Color inner;
 
-    private int speedX;
-    private int speedY;
+
+
+    private static int xSpeed;
+    public static int ySpeed;
+
 
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){
         this.center = center;
@@ -41,17 +41,18 @@ abstract public class Ball {
 
 
         ballFace = makeBall(center,radiusA,radiusB);
+
         this.border = border;
         this.inner  = inner;
-        speedX = 0;
-        speedY = 0;
+        xSpeed = 0;
+        ySpeed = 0;
     }
 
     protected abstract Shape makeBall(Point2D center,int radiusA,int radiusB);
 
     public void move(){
         RectangularShape tmp = (RectangularShape) ballFace;
-        center.setLocation((center.getX() + speedX),(center.getY() + speedY));
+        center.setLocation((center.getX() + xSpeed),(center.getY() + ySpeed));
         double w = tmp.getWidth();
         double h = tmp.getHeight();
 
@@ -63,24 +64,24 @@ abstract public class Ball {
     }
 
     public void setSpeed(int x,int y){
-        speedX = x;
-        speedY = y;
+        xSpeed = x;
+        ySpeed = y;
     }
 
     public void setXSpeed(int s){
-        speedX = s;
+        xSpeed = s;
     }
 
     public void setYSpeed(int s){
-        speedY = s;
+        ySpeed = s;
     }
 
     public void reverseX(){
-        speedX *= -1;
+        xSpeed *= -1;
     }
 
     public void reverseY(){
-        speedY *= -1;
+        ySpeed *= -1;
     }
 
     public Color getBorderColor(){
@@ -118,12 +119,12 @@ abstract public class Ball {
         right.setLocation(center.getX()+(width / 2),center.getY());
     }
 
-    public int getSpeedX(){
-        return speedX;
+    public static int getSpeedX(){
+        return xSpeed;
     }
 
-    public int getSpeedY(){
-        return speedY;
+    public static int getSpeedY(){
+        return ySpeed;
     }
 
 

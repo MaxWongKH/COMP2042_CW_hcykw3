@@ -17,8 +17,6 @@
  */
 package parts;
 
-import parts.Brick;
-
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;

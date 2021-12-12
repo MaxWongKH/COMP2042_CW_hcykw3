@@ -34,8 +34,13 @@ public class DebugConsole extends JDialog implements WindowListener{
     private GameBoard gameBoard;
     private Wall wall;
 
-
-    public DebugConsole(JFrame owner,Wall wall,GameBoard gameBoard){
+    /**
+     * DebugConsole creates adds the debugPanel onto the screen
+     * @param owner
+     * @param wall
+     * @param gameBoard
+     */
+    public DebugConsole(JFrame owner, Wall wall, GameBoard gameBoard){
 
         this.wall = wall;
         this.owner = owner;
@@ -45,10 +50,12 @@ public class DebugConsole extends JDialog implements WindowListener{
         debugPanel = new DebugPanel(wall);
         this.add(debugPanel,BorderLayout.CENTER);
 
-
         this.pack();
     }
 
+    /**
+     * initialize the set the layout of the displayed DebugConsole
+     */
     private void initialize(){
         this.setModal(true);
         this.setTitle(TITLE);
@@ -58,39 +65,64 @@ public class DebugConsole extends JDialog implements WindowListener{
         this.setFocusable(true);
     }
 
-
+    /***
+     * setLocation puts through a formula to get the x and y
+     */
     private void setLocation(){
         int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
         int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
         this.setLocation(x,y);
     }
 
-
+    /**
+     * windowOpened overrides the window event
+     * @param windowEvent window action
+     */
     @Override
     public void windowOpened(WindowEvent windowEvent) {
 
     }
 
+    /**
+     * windowClosing overrides the window event
+     * @param windowEvent window action
+     */
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         gameBoard.repaint();
     }
 
+    /**
+     * windowClosed overrides the window event
+     * @param windowEvent window action
+     */
     @Override
     public void windowClosed(WindowEvent windowEvent) {
 
     }
 
+    /**
+     * windowIconified overrides windowEvent
+     * @param windowEvent window action
+     */
     @Override
     public void windowIconified(WindowEvent windowEvent) {
 
     }
 
+    /**
+     *windowDeiconified overrides windowEvent
+     * @param windowEvent window action
+     */
     @Override
     public void windowDeiconified(WindowEvent windowEvent) {
 
     }
 
+    /**
+     * windowActivated overrides windowEvent
+     * @param windowEvent window action
+     */
     @Override
     public void windowActivated(WindowEvent windowEvent) {
         setLocation();
@@ -98,6 +130,10 @@ public class DebugConsole extends JDialog implements WindowListener{
         debugPanel.setValues(b.getSpeedX(),b.getSpeedY());
     }
 
+    /**
+     * windowDeactivated overrides windowEvent
+     * @param windowEvent window action
+     */
     @Override
     public void windowDeactivated(WindowEvent windowEvent) {
 

@@ -17,6 +17,7 @@
  */
 package main;
 
+import highscore.HighScore;
 import parts.Ball;
 import parts.Brick;
 
@@ -26,8 +27,8 @@ import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
 
-
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
+
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
@@ -37,10 +38,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final Color MENU_COLOR = new Color(0,255,0);
 
 
-    private static final int DEF_WIDTH = 600;
-    private static final int DEF_HEIGHT = 450;
+    //private static final int DEF_WIDTH = 600;
+    //private static final int DEF_HEIGHT = 450;
+    private static final int DEF_WIDTH = 1000;
+    private static final int DEF_HEIGHT = 750;
 
-    private static final Color BG_COLOR = Color.WHITE;
+    private static final Color BG_COLOR = Color.BLACK;
 
     private Timer gameTimer;
 
@@ -55,25 +58,44 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle continueButtonRect;
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
+    private Rectangle gameFace;
     private int strLen;
+
+    protected static Brick[] bricks;
+    protected int ballCount;
+    private static Brick[][] levels;
+
+    protected int ballXSpeed;
+    protected int ballYSpeed;
 
     private DebugConsole debugConsole;
 
+    /**
+     * GameBoard is the main menu display and text display
+     *
+     * @param owner
+     */
 
-    public GameBoard(JFrame owner){
+    public GameBoard(JFrame owner, Dimension gameDimension){
         super();
 
         strLen = 0;
         showPauseMenu = false;
 
+        ballXSpeed = Ball.getSpeedX();
+        ballYSpeed = Ball.getSpeedY();
 
+        HighScore hs = new HighScore();
+
+        gameFace = new Rectangle(new Point(0, 0), gameDimension);
+        this.setPreferredSize(gameDimension);
 
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
 
 
         this.initialize();
         message = "";
-        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
+        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(500,700));
 
         debugConsole = new DebugConsole(owner,wall,this);
         //initialize the first level
@@ -82,17 +104,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
+            message = String.format("Bricks: %d Balls: %d Score %d",Wall.getBrickCount(),wall.getBallCount(),wall.score);
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
                     wall.wallReset();
+                    hs.addScore("Local_Player", wall.score);
                     message = "Game over";
                 }
                 wall.ballReset();
                 gameTimer.stop();
             }
             else if(wall.isDone()){
-                if(wall.hasLevel()){
+                if(Wall.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
                     wall.ballReset();
@@ -110,8 +133,14 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     }
 
+    public GameBoard() {
+
+    }
 
 
+    /**
+     * initialize Initializes the require components for the game to run
+     */
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
         this.setFocusable(true);
@@ -132,6 +161,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.drawString(message,250,225);
 
         drawBall(wall.ball,g2d);
+        //loader = new ImageLoader(ImageLoader.ball);
+
 
         for(Brick b : wall.bricks)
             if(!b.isBroken())
@@ -152,6 +183,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+
     private void drawBrick(Brick brick,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -164,22 +196,27 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(tmp);
     }
+    /*
+        public Image getImage(){
+            return loader.getImage()
+        }
 
-    private void drawBall(Ball ball, Graphics2D g2d){
-        Color tmp = g2d.getColor();
+    */
+        private void drawBall(Ball ball, Graphics2D g2d){
+            Color tmp = g2d.getColor();
 
-        Shape s = ball.getBallFace();
+            Shape s = ball.getBallFace();
 
-        g2d.setColor(ball.getInnerColor());
-        g2d.fill(s);
+            g2d.setColor(ball.getInnerColor());
+            g2d.fill(s);
 
-        g2d.setColor(ball.getBorderColor());
-        g2d.draw(s);
+            g2d.setColor(ball.getBorderColor());
+            g2d.draw(s);
 
-        g2d.setColor(tmp);
-    }
+            g2d.setColor(tmp);
+        }
 
-    private void drawPlayer(Player p,Graphics2D g2d){
+    private void drawPlayer(Player p, Graphics2D g2d){
         Color tmp = g2d.getColor();
 
         Shape s = p.getPlayerFace();
@@ -266,6 +303,20 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmpColor);
     }
 
+/*
+    public void wallReset(){
+        for(Brick b : bricks)
+            b.repair();
+        brickCount = bricks.length;
+        ballCount = 3;
+    }
+
+    public static void nextLevel(){
+        bricks = levels[level++];
+        brickCount = bricks.length;
+    }
+*/
+
     @Override
     public void keyTyped(KeyEvent keyEvent) {
     }
@@ -292,7 +343,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                         gameTimer.start();
                 break;
             case KeyEvent.VK_F1:
-                if(keyEvent.isAltDown() && keyEvent.isShiftDown())
                     debugConsole.setVisible(true);
             default:
                 wall.player.stop();
@@ -307,6 +357,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
+        HighScore hs = new HighScore();
         if(!showPauseMenu)
             return;
         if(continueButtonRect.contains(p)){
@@ -318,10 +369,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.ballReset();
             wall.wallReset();
             showPauseMenu = false;
+            hs.addScore("Local_Player", wall.score);
             repaint();
         }
         else if(exitButtonRect.contains(p)){
             System.exit(0);
+
+            hs.addScore("Local_Player", wall.score);
         }
 
     }
