@@ -39,14 +39,17 @@ sort the .dat file and only display 10 high scores. The score will increment whe
 score while in game.
 
 ##Additional Playable Levels
+
 I added more brick types for higher levels in the game. **DiamondBrick** would are the strongest, and it takes more ball impact to destroy the brick. Another brick I
 added to the game is **TitaniumBrick** which is similar to the **SteelBrick** but has a low probability of breaking.
 
 ##Info Page
+
 I added an Info Page that can only be accessed in the main menu which briefly describes the objective of the Brick Breaker game. You have the option to press a button to 
 exit the info page and back to the Home Menu. 
 
 ##Home Menu background
+
 I made a Home Menu backdrop with the button that are able to Start the game, exit the game, display info page, and display the high-score list
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
