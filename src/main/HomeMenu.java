@@ -53,7 +53,11 @@ public class HomeMenu extends JLayeredPane {
 
     JTextArea highScoreText = new JTextArea();
 
-
+    /**
+     * HomeMenu will create the main menu and displays all the button images and buttons with the menu backdrop
+     * @param owner refers backs to the GameFrame class
+     * @param area the size of the main menu frame
+     */
     public HomeMenu(GameFrame owner,Dimension area){
 
         this.setFocusable(true);
@@ -317,9 +321,7 @@ public class HomeMenu extends JLayeredPane {
 
     }
 
-    /**
-     * enableMainMenu will add all the buttons and background image
-     */
+
     public void enableMainMenu(){
         this.add(menuBackground, DEFAULT_LAYER);
         this.add(startButton, PALETTE_LAYER);

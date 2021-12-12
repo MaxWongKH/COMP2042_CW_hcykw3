@@ -26,3 +26,17 @@ I did not need any of the old codes. Another example being, a bunch of libraries
    
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ADDITION
+
+##Permanent High-score List
+
+I created a **HighScore** class that handles the high-score list that will take the score of the player at the end of the game and save it into a file. It will then 
+sort the .dat file and only display 10 high scores. The score will increment when the 'brickCount-- ' in the **Wall** class. It will also display the player's current 
+score while in game.
+
+
+##Additional Playable Levels
+
+##Info Page
+
+##Home menu background
