@@ -34,9 +34,8 @@ I created a **HighScore** class that handles the high-score list that will take 
 sort the .dat file and only display 10 high scores. The score will increment when the 'brickCount-- ' in the **Wall** class. It will also display the player's current 
 score while in game.
 
-
 ##Additional Playable Levels
-
+I added more brick types for higher levels in the game. **DiamondBrick** would are the strongest, and it takes more ball impact to destroy the brick
 ##Info Page
 
 ##Home menu background

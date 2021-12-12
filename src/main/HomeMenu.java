@@ -321,7 +321,9 @@ public class HomeMenu extends JLayeredPane {
 
     }
 
-
+    /**
+     * enableMainMenu will add all the buttons and background image
+     */
     public void enableMainMenu(){
         this.add(menuBackground, DEFAULT_LAYER);
         this.add(startButton, PALETTE_LAYER);
@@ -330,9 +332,7 @@ public class HomeMenu extends JLayeredPane {
         this.add(infoButton, PALETTE_LAYER);
     }
 
-    /**
-     * enableInfo loads the info page with the info exit button
-     */
+
     public void enableInfo(){
         this.remove(menuBackground);
         this.remove(startButton);
